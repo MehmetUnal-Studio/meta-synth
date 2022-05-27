@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hand Tracking! • A-Frame</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame" />
+    <script src="https://raw.githack.com/aframevr/aframe/master/dist/aframe-master.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://gftruj.github.io/hand.tracking.controls.extras/dist/aframe-hand-tracking-controls-extras.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.2/Tone.js"
+      charset="utf-8"
+    ></script>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="scene.js"></script>
+    <script src="pinchable.js"></script>
+    <script src="color-change.js"></script>
+    <script src="pressable.js"></script>
+    <script src="ring-manager.js"></script>
+    <script src="ring.js"></script>
+    <script src="sound.js"></script>
+  </head>
+  <body>
+    
+  <a-scene environment="preset: tron">
+<!--     "default", "contact", "egypt", "checkerboard", "forest", "goaland", "yavapai", "goldmine", "arches", "threetowers", "poison", "tron", "japan", "dream", "volcano", "starry", "osiris" -->
+      
+    <a-entity position="0 0 0"> <a-camera></a-camera></a-entity> 
+    <a-entity light="type: point; intensity: 0.3; distance: 25; decay: 1" position="0 0 3"></a-entity>
+    <a-entity light="type: point; intensity: 0.3; distance: 25; decay: 1" position="3 0 0"></a-entity>
+    <a-entity light="type: point; intensity: 0.3; distance: 25; decay: 1" position="0 2 0" rotation="0 5 0" ></a-entity>
+     
+
+      
+      <a-entity id="menu" position="0 1 0" rotation="0 0 0">
+<!--         //en altaki -->
+        <a-entity id="slider1" slider position="0 -0.2 -0.2" rotation="0 0 0"></a-entity> 
+        <a-entity id="slider2" slider position="0 -0.4 -0.2" rotation="0 0 0" ></a-entity>
+        <a-entity id="slider3" slider position="0 -0.6 -0.2" rotation="0 0 0" ></a-entity>
+        
+      </a-entity>
+  
+<!-- YELLOW CENTER       -->
+      <a-entity rotation="-30 0 0" position="-0.4 1.6 -0.3" scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+         
+          id="1"
+          class="clickable"
+          synth="note: E5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: blue"
+        >
+        </a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0" position="0 1.6 -0.3" scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="2"
+          class="clickable"
+          synth="note: E3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0" position="0.4 1.6 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="3"
+          class="clickable"
+          synth="note: G5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+      
+
+    
+<!-- YELLOW LEFT       -->
+      <a-entity rotation="-30 90 0" position="-0.7 1.6 0.6" scale="0.7 0.7 0.7" ring-manager>
+        <a-ring
+          id="10"
+          class="clickable"
+          synth="note: E5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        >
+        </a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0" position="-0.7 1.6 0.3" scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="11"
+          class="clickable"
+          synth="note: E3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0" position="-0.7 1.6 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="12"
+          class="clickable"
+          synth="note: G5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+    
+    
+        
+<!-- YELLOW RIGHT      -->
+      <a-entity rotation="-30 -90 0" position="0.7 1.6 0.6" scale="0.7 0.7 0.7"  ring-manager>
+        <a-ring
+          id="19"
+          class="clickable"
+          synth="note: E5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        >
+        </a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0" position="0.7 1.6 0.3" scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="20"
+          class="clickable"
+          synth="note: E3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0" position="0.7 1.6 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="21"
+          class="clickable"
+          synth="note: G5"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: yellow"
+        ></a-ring>
+      </a-entity>
+      
+      
+    
+       
+    
+    
+ <!-- RED CENTER       -->   
+    
+    
+      <a-entity rotation="-30 0 0"position="-0.4 1.3 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+          id="4"
+          class="clickable"
+          synth="note: A4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0"position="0 1.3 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+
+          id="5"
+          class="clickable"
+          synth="note: E4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0"position="0.4 1.3 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+       
+          id="6"
+          class="clickable"
+          synth="note: F3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+    
+    
+   <!-- RED right -->     
+    
+     <a-entity rotation="-30 90 0"position="-0.7  1.3 0.6"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+  
+          id="22"
+          class="clickable"
+          synth="note: A4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0"position="-0.7  1.3 0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+  
+          id="23"
+          class="clickable"
+          synth="note: E4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0"position="-0.7  1.3 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+        
+          id="24"
+          class="clickable"
+          synth="note: F3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+    
+       
+   <!-- RED LEFT -->     
+    
+     <a-entity rotation="-30 -90 0"position="0.7  1.3 0.6"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+  
+          id="13"
+          class="clickable"
+          synth="note: A4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0"position="0.7  1.3 0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+  
+          id="14"
+          class="clickable"
+          synth="note: E4"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0"position="0.7  1.3 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+        
+          id="15"
+          class="clickable"
+          synth="note: F3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: red"
+        ></a-ring>
+      </a-entity>
+    
+    
+    
+    
+    
+    
+       
+   <!-- PINK CENTER -->      
+    
+      <a-entity rotation="-30 0 0"position="-0.4 1.0 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+      
+          id="7"
+          class="clickable"
+          synth="note: C3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0"position="0 1.0 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+        
+          id="8"
+          class="clickable"
+          synth="note: A3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 0 0"position="0.4 1.0 -0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+      
+          id="9"
+          class="clickable"
+          synth="note: E3"
+           radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      
+         
+   <!-- PINK LEFT -->      
+    
+      <a-entity rotation="-30 -90 0"position="0.7  1.0 0.6"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+        
+          id="25"
+          class="clickable"
+          synth="note: C3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0"position="0.7  1.0 0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+           
+          id="26"
+          class="clickable"
+          synth="note: A3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 -90 0"position="0.7 1.0 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+      
+          id="27"
+          class="clickable"
+          synth="note: E3"
+         radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+        
+           
+   <!-- PINK RIGHT -->      
+    
+      <a-entity rotation="-30 90 0"position="-0.7  1.0 0.6"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+        
+          id="16"
+          class="clickable"
+          synth="note: C3"
+          radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0"position="-0.7  1.0 0.3"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+           
+          id="17"
+          class="clickable"
+          synth="note: A3"
+         radius-inner="0.05"
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+      
+      <a-entity rotation="-30 90 0"position="-0.7 1.0 0.0"scale="0.7 0.7 0.7"ring-manager>
+        <a-ring
+      
+          id="18"
+          class="clickable"
+          synth="note: E3"
+          radius-inner="0.05" 
+          radius-outer="0.2"
+          segments-theta="64"
+          ring="color: pink"
+        ></a-ring>
+      </a-entity>
+  
+      <!--Hand Tracking-->
+      <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity>
+    </a-scene>
+  </body>
+</html>
